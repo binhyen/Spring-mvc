@@ -30,4 +30,8 @@
       <property name="suffix" value=".jsp" />
 
    </bean>
+   
+   <mvc:interceptors>
+   		<bean class="com.laptrinhjava.spring.interceptor.MennuHandlerInterceptor"></bean>
+   </mvc:interceptors>
 </beans>

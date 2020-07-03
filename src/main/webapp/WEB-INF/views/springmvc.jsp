@@ -4,12 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Home Page</title>
+<title>Spring MVC</title>
 </head>
-
 <body>
-<h1>Trang chủ</h1>
-<h1>Menu</h1>
-<%@ include file="menu.jsp" %>
+<h1>Spring MVC</h1>
 </body>
 </html>
