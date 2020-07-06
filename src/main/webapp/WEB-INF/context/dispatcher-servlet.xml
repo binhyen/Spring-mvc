@@ -20,7 +20,7 @@
 
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-   <context:component-scan base-package="com.laptrinhjava.spring.controller" />
+   <context:component-scan base-package="com.laptrinhjava.spring.controller,com.laptrinhjava.spring.api" />
    <mvc:annotation-driven />
    <bean
       class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -30,6 +30,8 @@
       <property name="suffix" value=".jsp" />
 
    </bean>
+   
+   <mvc:resources location="/template/" mapping="/template/**" />
    
    <mvc:interceptors>
    		<bean class="com.laptrinhjava.spring.interceptor.MennuHandlerInterceptor"></bean>
