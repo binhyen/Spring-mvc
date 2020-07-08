@@ -12,4 +12,13 @@ public interface INewsService {
 
 	Integer getTotalItem();
 	
+	NewsDTO findById(long id);
+	
+	NewsDTO insert(NewsDTO insertDTO);
+	
+	NewsDTO update(NewsDTO updateDTO);
+	
+	NewsDTO save(NewsDTO dto);
+
+	void delete(long[] ids);
 }

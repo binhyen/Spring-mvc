@@ -18,6 +18,9 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="<c:url value='/template/paging/jquery.twbsPagination.js' />"></script>
     <%-- <script src="<c:url value='/ckeditor/ckeditor.js' />"></script> --%>
+    
+    <link rel="stylesheet" href="<c:url value='/template/admin/sweetalert/sweetalert2.min.css' />">
+    <script src="<c:url value='/template/admin/sweetalert/sweetalert2.min.js' />"></script>
 </head>
 <body class="no-skin">
 	<!-- header -->
@@ -55,7 +58,6 @@
 	<script src="<c:url value='/template/admin/js/ace-elements.min.js' />"></script>
 	<script src="<c:url value='/template/admin/js/ace.min.js' />"></script>
 	<script src="<c:url value='/template/admin/js/bootstrap.min.js'/>"></script>
-	
 	<!-- page specific plugin scripts -->
 	<script src="<c:url value='/template/admin/js/jquery-ui.min.js'/>"></script>
 	

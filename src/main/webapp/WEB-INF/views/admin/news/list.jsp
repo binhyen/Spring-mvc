@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp" %>
-<c:url var="APIurl" value="/api-admin-news"></c:url>
-<c:url var="NEWurl" value="/admin-news"></c:url>
+<c:url var="APIurl" value="/api/news"></c:url>
+<c:url var="NEWurl" value="/quan-tri/bai-viet/danh-sach"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,15 +33,16 @@
 							<div class="table-btn-controls">
 								<div class="pull-right tableTools-container">
 									<div class="dt-buttons btn-overlap btn-group">
+										<c:url var="createNewsURL" value="/quan-tri/bai-viet/chinh-sua"/>
 										<a flag="info"
 										   class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" data-toggle="tooltip"
-										   title='Thêm bài viết' href='#'>
+										   title='Thêm bài viết' href='${createNewsURL}'>
 											<span>
 												<i class="fa fa-plus-circle bigger-110 purple"></i>
 												<!-- <i class="fas fa-plus-circle"></i> -->
 											</span>
 										</a>
-										<button id="btnDelete" type="button"
+										<button id="btnDelete" type="button" onclick="warningBeforeDelete()"
 												class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" data-toggle="tooltip" title='Xóa bài viết'>
 											<span>
 												<i class="fa fa-trash-o bigger-110 pink"></i>
@@ -64,14 +65,17 @@
 			                                </tr>
 			                            </thead>
 			                            <tbody>
-				                            <c:forEach var="item" items="${model.listModel }">
+				                            <c:forEach var="item" items="${model.listModel}">
 				                            	<tr>
 													<td><input type="checkbox"  value="${item.id}" id="checkbox_${item.id}"></td>
-				                                    <td>${item.title }</td>
-				                                    <td>${item.shortDescription }</td>
+				                                    <td>${item.title}</td>
+				                                    <td>${item.shortDescription}</td>
 				                                    <td>
+				                                    	<c:url var="updateNewsURL" value="/quan-tri/bai-viet/chinh-sua">
+															<c:param name="id" value="${item.id}"/>
+														</c:url>
 														<a class="btn btn-sm btn-primary btn-edit" data-toggle="tooltip"
-														   title="Cập nhật bài viết" href='#'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+														   title="Cập nhật bài viết" href='${updateNewsURL}'><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 														</a>
 													</td>
 				                                </tr>
@@ -82,9 +86,6 @@
 			                          	<ul class="pagination" id="pagination"></ul>
 			                          	<input type="hidden" value="" id="page" name="page"/>
 										  <input type="hidden" value="" id="limit" name="limit"/>
-										  <!-- <input type="hidden" value="" id="sortName" name="sortName"/>
-										  <input type="hidden" value="" id="sortBy" name="sortBy"/>
-										  <input type="hidden" value="" id="type" name="type"/> -->
 			                          </div>
 								</div>
 			                </div>
@@ -108,14 +109,59 @@
 				if (curentPage != page) {
 					$('#limit').val(limit);
 					$('#page').val(page);
-					/* $('#sortName').val('title');
-					$('#sortBy').val('asc');
-					$('#type').val('list'); */
 	                $('#formSubmit').submit();
 				}
 	        }
 	    });
 	});
+
+   /* 
+    $('#btnDelete').click(function(){
+        var data = {};
+    	var ids = $('tbody input[type=checkbox]:checked').map(function(){
+    		return $(this).val();
+        }).get();
+    	data["ids"] = ids;
+    }); */
+   
+	
+	function warningBeforeDelete() {
+		swal({
+		  title: "Xác nhận xóa",
+		  text: "Bạn có chắc chắn muốn xóa hay không?",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonClass: "btn-success",
+		  cancelButtonClass: "btn-danger",
+		  confirmButtonText: "Xác nhận",
+		  cancelButtonText: "Hủy",
+		}).then(
+		function(isConfirm) {
+			console.log(isConfirm.value);
+		  if (isConfirm.value) {
+	    	var ids = $('tbody input[type=checkbox]:checked').map(function(){
+	    		return $(this).val();
+	        }).get();
+	    	deleteNews(ids);
+		  }
+		});
+	}
+	
+	function deleteNews(data) {
+        $.ajax({
+            url:'${APIurl}',
+            type: 'DELETE',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (result) {
+				window.location.href = "${NEWurl}?page=1&limit=2&message=delete_success";
+            },
+            error: function (error) {
+                window.location.href = "${NEWurl}?page=1&limit=2&message=error_system";
+            }
+        })
+        
+    }
 </script>
 </body>
 </html>
