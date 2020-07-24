@@ -15,8 +15,6 @@ public class SecurityUtils {
 		return myUser;
 	}
 	
-	
-	
 	public static List<String> getAuthorities() {
 		List<String> results = new ArrayList<String>();
 		List<GrantedAuthority> authorities = (List<GrantedAuthority>)(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
