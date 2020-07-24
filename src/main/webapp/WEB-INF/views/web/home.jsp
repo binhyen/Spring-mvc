@@ -22,7 +22,7 @@
 		<div class="row align-items-center my-5">
 			<div class="col-lg-7">
 				<img class="img-fluid rounded mb-4 mb-lg-0"
-					src="http://placehold.it/900x400" alt="">
+					src="https://cdn.bongdaplus.vn/Assets/Media/2020/02/10/70/de-jong.jpg" alt="">
 			</div>
 			<!-- /.col-lg-8 -->
 			<div class="col-lg-5">
@@ -48,7 +48,7 @@
 
 		<!-- Content Row -->
 		<div class="row">
-			<c:forEach items="${model}" var="item">
+			<%-- <c:forEach items="${model}" var="item">
 				<div class="col-md-4 mb-5">
 					<div class="card h-100">
 						<div class="card-body">
@@ -61,6 +61,21 @@
 					</div>
 				</div>
 				<!-- /.col-md-4 -->
+			</c:forEach> --%>
+			<c:forEach items="${model}" var="item">
+				<div class="col-md-4 mb-5">
+					<div class="card h-100">
+					
+						<a href="<c:url value='/news/detail'/>">
+								<img class="card-img-top" src="https://cdn.bongdaplus.vn/Assets/Media/2020/02/10/70/de-jong.jpg" alt="hi">
+							</a>	
+						<div class="card-body">
+							
+							<h4 class="card-title">${item.title}</h4>
+							<p class="card-text">${item.shortDescription}</p>
+						</div>
+					</div>
+				</div>
 			</c:forEach>
 		</div>
 		<!-- /.row -->

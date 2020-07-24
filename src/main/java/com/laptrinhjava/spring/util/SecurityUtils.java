@@ -11,7 +11,15 @@ import com.laptrinhjava.spring.dto.MyUser;
 public class SecurityUtils {
 
 	public static MyUser getPrincipal() {
-		MyUser myUser = (MyUser) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+		MyUser myUser = null;
+		try {
+			myUser = (MyUser) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			
+		}
+		
 		return myUser;
 	}
 	
